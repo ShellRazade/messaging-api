@@ -1,3 +1,4 @@
+import { toJSON } from "@reis/mongoose-to-json";
 import { Schema, model } from "mongoose";
 
 const roomSchema = new Schema({
@@ -8,6 +9,8 @@ const roomSchema = new Schema({
         timestamps: true
     }
 );
+
+roomSchema.plugin(toJSON);
 
 export const RoomModel = model('Room', roomSchema);
 

@@ -1,3 +1,4 @@
+import { toJSON } from "@reis/mongoose-to-json";
 import { Schema, Types, model } from "mongoose";
 
 const messageSchema = new Schema({
@@ -13,5 +14,7 @@ const messageSchema = new Schema({
         timestamp: { type: Date, default: Date.now },
     }
 );
+
+messageSchema.plugin(toJSON);
 
 export const MessageModel = model("Message", messageSchema);

@@ -13,6 +13,7 @@ const userSchema = new Schema(
        timestamps: true
     }
  );
+ 
  userSchema.plugin(toJSON);
  
  export const UserModel = model("User", userSchema);
