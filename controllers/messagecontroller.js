@@ -1,9 +1,9 @@
-import Message from './models/MessageModel.js';
+import { MessageModel } from "../models/messagemodel.js";
 
 export const getMessages = async (req, res, next) => {
     try {
         const { room } = req.params;
-        const messages = await Message.find({ room })
+        const messages = await MessageModel.find({ room })
             .populate("sender", "username")
             .sort({ timestamp: 1 });
         res.status(200).json(messages);
@@ -32,7 +32,7 @@ export const getMessageById = async (req, res, next) => {
     try {
         const { messageId } = req.params;
         
-        const message = await Message.findById(messageId)
+        const message = await MessageModel.findById(messageId)
             .populate('sender', 'username');  // Populating sender's username like in getMessages
         
         if (!message) {
@@ -52,7 +52,7 @@ export const updateMessages = async (req, res, next) => {
         const { messageId } = req.params;
         const { content } = req.body;
 
-        const updatedMessage = await Message.findByIdAndUpdate(
+        const updatedMessage = await MessageModel.findByIdAndUpdate(
             messageId,
             { content },
             { new: true }
@@ -74,7 +74,7 @@ export const deleteMessages = async (req, res, next) => {
     try {
         const { messageId } = req.params;
 
-        const deletedMessage = await Message.findByIdAndDelete(messageId);
+        const deletedMessage = await MessageModel.findByIdAndDelete(messageId);
 
         if (!deletedMessage) {
             return res.status(404).json({ error: 'Message not found' });

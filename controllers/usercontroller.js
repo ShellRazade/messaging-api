@@ -52,7 +52,7 @@ export const userLogin = async (req, res, next) => {
         // now generate a token for the person
         const token = jwt.sign({ id: user.id }, process.env.JWT_PRIVATE_KEY, {
             expiresIn: "24h",
-        });
+        });   
         res.json({
             message: "user logged in", accessToken: token,
         });

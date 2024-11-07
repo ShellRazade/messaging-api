@@ -1,21 +1,22 @@
 import { Router } from "express";
-import { deleteMessages, getMessageById, getMessages, postMessages, updateMessages } from "../controllers/messagecontroller";
+import { deleteMessages, getMessageById, getMessages, postMessages, updateMessages } from "../controllers/messagecontroller.js";
+import { isauthenticated } from "../middlewares/auth.js";
 
-const messagerouter = Router();
+const messageRouter = Router();
 
 // POST a new message
-messagerouter.post("/messages", postMessages);
+messageRouter.post("/messages",isauthenticated, postMessages);
 
 // GET messages for a specific room
-messagerouter.get("/messages", getMessages);
+messageRouter.get("/messages",isauthenticated, getMessages);
 
 // GET a specific message
-messagerouter.get("/message/:id", getMessageById);
+messageRouter.get("/message/:id",isauthenticated, getMessageById);
 
 // UPDATE a specific message
-messagerouter.patch('/message/:id', updateMessages);
+messageRouter.patch('/message/:id',isauthenticated, updateMessages);
 
 // DELETE a specific message
-messagerouter.delete("/message/:id", deleteMessages);
+messageRouter.delete("/message/:id",isauthenticated, deleteMessages);
 
-export default messagerouter;
+export default messageRouter;
