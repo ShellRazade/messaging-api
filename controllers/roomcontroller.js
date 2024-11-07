@@ -34,6 +34,18 @@ export const getAllRooms = async (req, res, next) => {
     }
 };
 
+// Get a room
+export const getRoomById = async (req, res, next) => {
+    try {
+        const room = await RoomModel.findById(req.params.id);
+        if (!room) return res.status(404).json({ error: "Room not found!" });
+
+        res.status(200).json(room);
+    } catch (error) {
+        next(error);
+    }
+};
+
 // Delete a room
 export const deleteRoom = async (req, res, next) => {
     try {

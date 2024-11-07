@@ -1,4 +1,4 @@
-import { Schema, Types ,model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 const messageSchema = new Schema({
     sender: {
@@ -7,7 +7,7 @@ const messageSchema = new Schema({
         required: true
     },
     content: { type: String, required: true },
-    room: { type: String, required: true }
+    room: { type: Types.ObjectId, ref: "room", required: true }
 },
     {
         timestamp: { type: Date, default: Date.now },
