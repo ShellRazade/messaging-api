@@ -1,29 +1,40 @@
 import { MessageModel } from "../models/messagemodel.js";
+import { postMessageValidator } from "../validators/messagevalidator.js";
 
-export const getMessages = async (req, res, next) => {
+export const postMessage = async (req, res, next) => {
     try {
-        const { room } = req.params;
-        const messages = await MessageModel.find({ room })
-            .populate("sender", "username")
-            .sort({ timestamp: 1 });
-        res.status(200).json(messages);
+        const { error,value} = postMessageValidator.validate({
+            ...req.body,
+        });
+        if (error) {
+            return res.status(422).json(error);
+        }
+
+        // write  Message to database
+        await MessageModel.create({
+            ...value,
+            user: req.auth.id
+        });
+        
+        // Respond to Request
+        res.status(201).json("sent");
     } catch (error) {
         next(error);
-        res.status(500).json({ error: 'Failed to retrieve messages' });
+      
     }
 };
 
 
-export const postMessages = async (req, res, next) => {
+export const getMessages = async (req, res, next) => {
     try {
         const { sender, content, room } = req.body;
-        const newMessage = new Message({ sender, content, room });
+        const newMessage = new MessageModel
+        ({ sender, content, room });
         const savedMessage = await newMessage.save();
 
         res.status(201).json(savedMessage);
     } catch (error) {
         next(error);
-        res.status(500).json({ error: 'Failed to save message' });
     }
 };
 

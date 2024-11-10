@@ -2,13 +2,13 @@ import { toJSON } from "@reis/mongoose-to-json";
 import { Schema, Types, model } from "mongoose";
 
 const messageSchema = new Schema({
-    sender: {
+    user: {
         type: Types.ObjectId,
         ref: 'User',
         required: true
     },
     content: { type: String, required: true },
-    room: { type: Types.ObjectId, ref: "room", required: true }
+    room: { type: Types.ObjectId, ref: "Room", required: true }
 },
     {
         timestamp: { type: Date, default: Date.now },

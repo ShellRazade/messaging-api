@@ -26,7 +26,8 @@ export const createRoom = async (req, res, next) => {
 // Get all rooms
 export const getAllRooms = async (req, res, next) => {
     try {
-        const rooms = await RoomModel.find();
+        const rooms = await RoomModel.find()
+            .populate('user', 'username');  // Assuming you want to show room creator's username
         res.status(200).json(rooms);
     } catch (error) {
         next(error);
@@ -37,8 +38,12 @@ export const getAllRooms = async (req, res, next) => {
 // Get a room
 export const getRoomById = async (req, res, next) => {
     try {
-        const room = await RoomModel.findById(req.params.id);
-        if (!room) return res.status(404).json({ error: "Room not found!" });
+        const room = await RoomModel.findById(req.params.id)
+            .populate('user', 'username');
+            
+        if (!room) {
+            return res.status(404).json({ error: "Room not found!" });
+        }
 
         res.status(200).json(room);
     } catch (error) {
@@ -49,17 +54,17 @@ export const getRoomById = async (req, res, next) => {
 // Delete a room
 export const deleteRoom = async (req, res, next) => {
     try {
-        const room = await RoomModel.findByIdAndDelete(
-            {
-                _id: req.params.id,
-                user: req.auth.id
-            }
-        );
+        const room = await RoomModel.findOneAndDelete({
+            _id: req.params.id,
+            user: req.auth.id  // Only allow deletion by room creator
+        });
+
         if (!room) {
-            return res.status(404).json("Room not found!");
+            return res.status(404).json({ error: "Room not found or unauthorized!" });
         }
-        res.status(200).json({ message: 'Room deleted!' });
+
+        res.status(200).json({ message: 'Room deleted successfully' });
     } catch (error) {
         next(error);
     }
-}
+};
