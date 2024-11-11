@@ -45,7 +45,7 @@ export const getAllRooms = async (req, res, next) => {
             .limit(limit)
             .skip(skip);
             // Return a response
-        res.status(200).json(rooms);
+        res.status(200).json(rooms);  
     } catch (error) {
         next(error);
     }
