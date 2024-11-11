@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createRoom, deleteRoom, getAllRooms, getRoomById } from "../controllers/roomcontroller.js";
+import { countRooms, createRoom, deleteRoom, getAllRooms, getRoomById } from "../controllers/roomcontroller.js";
 import { isauthenticated } from "../middlewares/auth.js";
 
 const roomRouter = Router();
@@ -7,6 +7,8 @@ const roomRouter = Router();
 roomRouter.post("/rooms", isauthenticated, createRoom);
 
 roomRouter.get("/rooms", isauthenticated, getAllRooms);
+
+roomRouter.get("/rooms/count", isauthenticated, countRooms);
  
 roomRouter.get("/rooms/:id", isauthenticated, getRoomById);
 
