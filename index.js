@@ -6,6 +6,7 @@ import cors from "cors";
 import userRouter from "./routes/userroutes.js";
 import roomRouter from "./routes/roomroutes.js";
 import messageRouter from "./routes/messageroute.js";
+import imageRouter from "./routes/imageroute.js";
 
 await mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Database connected successfully"))
@@ -17,7 +18,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(userRouter, roomRouter, messageRouter);
+app.use(userRouter, roomRouter, messageRouter, imageRouter);
 
 // io.on('connection', (socket) => {
 //     console.log('User connected:', socket.id);

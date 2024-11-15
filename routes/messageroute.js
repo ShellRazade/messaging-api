@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteMessages, getMessageById, getMessages, postMessage, updateMessages } from "../controllers/messagecontroller.js";
+import { deleteMessages, getAllMessages, getMessageById, postMessage, updateMessages } from "../controllers/messagecontroller.js";
 import { isauthenticated } from "../middlewares/auth.js";
 
 const messageRouter = Router();
@@ -8,7 +8,7 @@ const messageRouter = Router();
 messageRouter.post("/messages", isauthenticated, postMessage);
 
 // GET messages for a specific room
-messageRouter.get("/messages", isauthenticated, getMessages);
+messageRouter.get("/messages", isauthenticated, getAllMessages);
 
 // GET a specific message
 messageRouter.get("/message/:id", isauthenticated, getMessageById);
