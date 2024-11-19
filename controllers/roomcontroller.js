@@ -24,7 +24,7 @@ export const createRoom = async (req, res, next) => {
 }
 
 // Get all rooms
-// export const getAllRooms = async (req, res, next) => {
+// export const getAllRooms = async (req, res, next) => { 
 //     try {
 //         const rooms = await RoomModel.find()
 //             .populate('user', 'username');  // Assuming you want to show room creator's username
@@ -94,3 +94,14 @@ export const deleteRoom = async (req, res, next) => {
         next(error);
     }
 }
+  
+
+
+
+
+
+
+
+
+
+

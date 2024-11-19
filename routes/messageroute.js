@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteMessages, getAllMessages, getMessageById, postMessage, updateMessages } from "../controllers/messagecontroller.js";
+import { deleteMessage, getAllMessages, getMessageById, postMessage, updateMessage } from "../controllers/messagecontroller.js";
 import { isauthenticated } from "../middlewares/auth.js";
 
 const messageRouter = Router();
@@ -14,9 +14,9 @@ messageRouter.get("/messages", isauthenticated, getAllMessages);
 messageRouter.get("/message/:id", isauthenticated, getMessageById);
 
 // UPDATE a specific message
-messageRouter.patch('/message/:id', isauthenticated, updateMessages);
+messageRouter.patch('/message/:id', isauthenticated, updateMessage);
 
 // DELETE a specific message
-messageRouter.delete("/message/:id", isauthenticated, deleteMessages);
+messageRouter.delete("/message/:id", isauthenticated, deleteMessage);
 
 export default messageRouter;

@@ -8,3 +8,4 @@ export const chatRoomImageUpload = multer({
     }),
     preservePath: true
 });
+

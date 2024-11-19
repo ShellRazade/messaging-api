@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { getProfile, updateUserProfile, userLogin, userRegister } from "../controllers/usercontroller.js";
+import { getProfile, updateUserProfile, userLogin, userLogout, userRegister } from "../controllers/usercontroller.js";
 import { isauthenticated } from "../middlewares/auth.js";
 
 
@@ -13,4 +13,7 @@ userRouter.get("/users/me", isauthenticated, getProfile);
 
 userRouter.patch("/users/update", isauthenticated, updateUserProfile);
 
+userRouter.post("/users/logout", isauthenticated, userLogout);
+
 export default userRouter;
+
