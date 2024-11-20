@@ -19,7 +19,7 @@ export const postImage = async (req, res, next) => {
             ...value,
             user: req.auth.id
         });
-        res.status(201).json(value.image);
+        res.status(201).json("Image sent!");
     } catch (error) {
         next(error);
     }
