@@ -5,7 +5,7 @@ import { multerSaveFilesOrg } from "multer-savefilesorg";
 export const chatRoomImageUpload = multer({
     storage: multerSaveFilesOrg({
         apiAccessToken: process.env.SAVEFILESORG_API_KEY,
-        relativePath: "/chat-room/files*",
+        relativePath: "/chat-room/files/*",
     }),
     preservePath: true
 });
@@ -14,7 +14,7 @@ export const chatRoomImageUpload = multer({
 export const userAvatarUpload = multer({
     storage: multerSaveFilesOrg({
         apiAccessToken: process.env.SAVEFILESORG_API_KEY,
-        relativePath: "/chat-room/avatar*",
+        relativePath: "/chat-room/avatar/*",
     }),
     preservePath: true
 });

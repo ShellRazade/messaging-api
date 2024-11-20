@@ -175,13 +175,13 @@ export const updateUserProfile = async (req, res, next) => {
             return res.status(422).json({ error: error.details[0].message });
         }
         // Find the user ID
-        const updatedVendor = await UserModel.findByIdAndUpdate(
+        const updatedUser = await UserModel.findByIdAndUpdate(
             req.auth.id,
             value,
             { new: true }
         );
-        console.log(updatedVendor)
-        if (!updatedVendor) {
+        console.log(updatedUser)
+        if (!updatedUser) {
             return res.status(404).json({ message: "user not found" });
         }
         //Send the updated vendor profile
