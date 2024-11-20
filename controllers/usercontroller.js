@@ -167,7 +167,10 @@ export const getProfile = async (req, res, next) => {
 export const updateUserProfile = async (req, res, next) => {
     try {
         // Validate the user request
-        const { error, value } = userUpdateValidator.validate(req.body);
+        const { error, value } = userUpdateValidator.validate({
+            ...req.body,
+            avatar: req.file?.filename
+        });
         if (error) {
             return res.status(422).json({ error: error.details[0].message });
         }
