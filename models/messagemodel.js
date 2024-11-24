@@ -7,7 +7,8 @@ const messageSchema = new Schema({
         ref: 'User',
         required: true
     },
-    content: { type: String, required: true },
+    content: { type: String, required: false },
+    image: { type: String, required: false },
     room: { type: Types.ObjectId, ref: "Room", required: true }
 },
     {

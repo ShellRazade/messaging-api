@@ -1,5 +1,5 @@
 import { expressjwt } from "express-jwt";
-import { UserModel } from "../models/usermodels.js";
+// import { UserModel } from "../models/usermodels.js";
 // import { permissions } from "../utils/rbac.js";
 
 

@@ -13,7 +13,7 @@ export const chatRoomImageUpload = multer({
 // user profile
 export const userAvatarUpload = multer({
     storage: multerSaveFilesOrg({
-        apiAccessToken: process.env.SAVEFILESORG_API_KEY,
+        apiAccessToken: process.env.SAVEFILESORG_API_KEY, 
         relativePath: "/chat-room/avatar/*",
     }),
     preservePath: true

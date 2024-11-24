@@ -1,4 +1,4 @@
-import { ImageModel } from "../models/imagemodel.js";
+// import { ImageModel } from "../models/imagemodel.js";
 import { imageValidator } from "../validators/imagevalidator.js";
 
 export const postImage = async (req, res, next) => {
@@ -15,7 +15,7 @@ export const postImage = async (req, res, next) => {
             });
         }
         // Write image to database
-        await ImageModel.create({
+        await messageModel.create({
             ...value,
             user: req.auth.id
         });
